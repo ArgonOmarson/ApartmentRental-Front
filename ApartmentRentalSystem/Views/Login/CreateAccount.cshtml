@@ -1,0 +1,85 @@
+﻿@model ApartmentRentalSystem.Models.User
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    #icons {
+        position: relative;
+        top: 315px;
+        left: 785px;
+    }
+
+    .picture {
+        margin: 5px;
+    }
+
+    .imageLogin {
+        left: 0;
+        width: 50%;
+        height: 100%;
+        background-color: blue;
+        position: absolute;
+    }
+
+    #formboxLogin {
+        left: 800px;
+        top: 300px;
+        position: relative;
+    }
+
+    #LoginText {
+        top: 200px;
+        left: 850px;
+        position: relative;
+        font-weight: bold;
+    }
+    #CreateAccountText {
+        top: 200px;
+        left: 780px;
+        position: relative;
+        font-weight: bold;
+    }
+</style>
+
+<header>
+    <link href="~/Content/LoginStyle.css" rel="stylesheet" />
+</header>
+<body>
+    <img class="imageLogin" src="~/Image/mono-gatvy.jpg" />
+
+    <h2 id="CreateAccountText">Create Account</h2>
+
+    <div id="formboxLogin">
+        @using (Html.BeginForm())
+        {
+            <div>Username</div>
+            <div>@Html.TextBoxFor(m => m.Username)</div>
+            <div>Password</div>
+            <div>@Html.TextBoxFor(m => m.Password)</div>
+
+            <div>Landlord? @Html.CheckBoxFor(m => m.Landlord)</div>
+
+            <input type="submit" value="Create" />
+        }
+        @if (ViewBag.Message != null)
+        {
+            <script type="text/javascript"> /* This javaScript is used to have a pop-up message box when something is achived */
+
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+            </script>
+
+        }
+    </div>
+
+
+    <div id="icons">
+        <a rel="nofollow" target="_blank" href="http://www.facebook.com"><img class="picture" src="~/Image/facebook.png" width="40px"></a>
+        <a rel="nofollow" target="_blank" href="http://www.instagram.com"><img class="picture" src="~/Image/instagram.png" width="40px"></a>
+        <a rel="nofollow" target="_blank" href="http://www.youtube.com"><img class="picture" src="~/Image/youtube.png" width="40px"></a>
+        <a rel="nofollow" target="_blank" href="http://www.twitter.com"><img class="picture" src="~/Image/twitter.png" width="40px"></a>
+    </div>
+
+</body>
+

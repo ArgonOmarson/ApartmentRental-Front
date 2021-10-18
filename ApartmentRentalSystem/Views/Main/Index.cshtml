@@ -1,0 +1,218 @@
+﻿@model IEnumerable<ApartmentRentalSystem.Models.Apartment>
+
+
+@{
+    ViewBag.Title = "MainPage";
+}
+
+<html lang="de">
+
+<head>
+    <style>
+        #icons {
+            position: relative;
+            top: 400px;
+            left: 500px;
+        }
+
+        .Parent {
+            position: relative;
+        }
+
+        .picture {
+            margin-top: 150px;
+            margin-bottom: 20px;
+            width: 300px;
+            height: 200px;
+        }
+
+        #mainScreenTop {
+            position: relative;
+            height: 700px;
+            background-color: lightgoldenrodyellow;
+        }
+
+        .mainScreenTopField {
+            float: left;
+            width: 32%;
+            margin-right: 2%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+            .mainScreenTopField:last-child {
+                margin-right: 0;
+            }
+
+        #bottom {
+            position: absolute;
+            width: 100%;
+            height: 1500px;
+            background-color: lightgreen;
+            left: 0;
+            border-top: 5px solid black;
+        }
+
+        #searchBox {
+            position: relative;
+            top: 200px;
+            left: 50%;
+            height: 130px;
+            width: 900px;
+            transform: translate(-50%, -50%);
+            background-color: lightgoldenrodyellow;
+        }
+
+        #apartements {
+            position: relative;
+            top:200px;
+            left: 50%;
+            height: auto;
+            width: 1300px;
+            transform: translate(-50%, -50%);
+            background-color: pink;
+        }
+
+        #footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 500px;
+            width: 100%;
+            background-color: red;
+        }
+        .apartment_bild{
+            width:50px;
+            height:50px;
+        }
+        img.apartment {
+            width: 200px;
+        }
+        td {
+            width: 100px;
+        }
+        img.apartmentPictures{
+            width:200px;
+            height:200px;
+        }
+    </style>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript"> /* This javaScript is used to have a pop-up message box when something is achived */
+
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+
+    }
+    <meta charset="ascii">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartment Rental</title>
+
+</head>
+<body style=" margin:0px; background-color:lightblue; border-bottom:solid">
+    <div id="mainScreenTop">
+        <div class="mainScreenTopField">
+            <img class="picture" src="~/Image/Company.jpg">
+            <p style="color:black; ">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam enim erat, elementum a dolor nec, auctor porta augue.
+                Sed lobortis laoreet mauris, eu pretium purus laoreet eget. Curabitur justo enim, egestas eleifend malesuada vitae, suscipit
+                ultricies mauris. In volutpat urna non arcu dapibus lacinia. Nam sit amet lectus sed elit viverra molestie.
+            </p>
+        </div>
+
+
+        <div class="mainScreenTopField">
+            <img class="picture" src="~/Image/Apartments.jpg">
+            <p style="color:black;">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam enim erat, elementum a dolor nec, auctor porta augue.
+                Sed lobortis laoreet mauris, eu pretium purus laoreet eget. Curabitur justo enim, egestas eleifend malesuada vitae, suscipit
+                ultricies mauris. In volutpat urna non arcu dapibus lacinia. Nam sit amet lectus sed elit viverra molestie.
+            </p>
+        </div>
+
+
+        <div class="mainScreenTopField">
+            <img class="picture" src="~/Image/Landlord.jpeg">
+            <p style="color:black;">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam enim erat, elementum a dolor nec, auctor porta augue.
+                Sed lobortis laoreet mauris, eu pretium purus laoreet eget. Curabitur justo enim, egestas eleifend malesuada vitae, suscipit
+                ultricies mauris. In volutpat urna non arcu dapibus lacinia. Nam sit amet lectus sed elit viverra molestie.
+            </p>
+        </div>
+    </div>
+
+    <div id="bottom">
+        <div id="searchBox">
+            @using (Html.BeginForm())
+            {
+                <table style="margin-left:100px;">
+                    <tr style="margin-top: 50px;">
+                        <td style="font-weight:bold;">Enter location: </td>
+                        <td style="font-weight:bold;">Enter Min price: </td>
+                        <td style="font-weight:bold;">Enter Max price: </td>
+                        <td style="font-weight:bold;">Enter room: </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.TextBox("location")</td>
+                        <td>@Html.TextBox("Minprice")</td>
+                        <td>@Html.TextBox("Maxprice")</td>
+                        <td>@Html.TextBox("room")</td>
+                    </tr>
+
+                </table>
+                <input type="submit" value="Submit" style="margin-left:47%; margin-top:20px;">
+            }
+
+        </div>
+
+        <div id="apartements">
+
+            @foreach (var item in Model)
+            {<table style="float:left;margin:5px;">
+                    <tr>
+                        <td colspan="2"><img src="@Url.Content(item.Picture)" class="apartmentPictures" /></td>
+                    </tr>
+                    <tr style="border:2px solid black">
+                        <td>@Html.DisplayFor(x => item.NumberOfRooms) rooms</td>
+                        <td>@Html.DisplayFor(x => item.Price) kr/month</td>
+                    </tr>
+                    <tr style="border:2px solid black">
+                        <td>@Html.DisplayFor(x => item.Location)</td>
+                        <td>@Html.DisplayFor(x => item.SizeOfApartment) kvm</td>
+                    </tr>
+                    <tr style="border:2px solid black">
+                        <td>@Html.DisplayFor(x => item.Address)</td>
+                        <td>@Html.ActionLink("Go To", "ApartmentAsync", "Main", 
+                           new { 
+                               Id = item.Id 
+                               }, null)</td>
+                    </tr>
+                </table>
+            }
+
+            @*MAKE IT AUTO, SO IT FILLS BY IT SELF*@
+        </div>
+
+        <div id="footer">
+            <h3 style="margin-left:45%;margin-right:45%;width:300px;margin-top:30px;margin-bottom:30px;">Follow us on:</h3>
+            <a style="float:left;margin:88px; margin-left:220px" rel="nofollow" target="_blank" href="http://www.facebook.com">
+                <img src="~/Image/facebook.png" />
+            </a>
+            <a style="float:left;margin:88px;" rel = "nofollow" target="_blank" href="http://www.instagram.com">
+                <img src="~/Image/instagram.png" />
+            </a>
+            <a style="float:left;margin:88px;" rel="nofollow" target="_blank" href="http://www.twitter.com">
+                <img src="~/Image/twitter.png" />
+            </a>
+            <a style="float:left;margin:88px;" rel="nofollow" target="_blank" href="http://www.youtube.com">
+                <img src="~/Image/youtube.png" />
+            </a>
+        </div>
+    </div>
+
+    
+
+</body>
+</html>
